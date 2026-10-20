@@ -6,13 +6,13 @@ it is here in the first place.
 ## Packages 
 
 # DPKG based:
-<libxml2.so.2.deb> Needed for lldb 22.1.8 to work on Ubuntu x26: libxml library no longer compatible with the 22.1.8 lldb tool.
+[libxml2.so.2.deb] Needed for lldb 22.1.8 to work on Ubuntu x26: libxml library no longer compatible with the 22.1.8 lldb tool.
 
 # Pacman based:
-<> Reason here
+[] Reason here
 
 # RPM based:
-<> Reason here
+[] Reason here
 
 # XBPS based:
-<> Reason here
+[] Reason here
