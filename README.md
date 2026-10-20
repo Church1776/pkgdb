@@ -15,4 +15,4 @@ pkg - Reason here
 pkg - Reason here
 
 ## XBPS based:
-pkg - Reason here
+church1776-slang-v2026.20_1.x86_64.xbps - S Shader Language: Needed for game development
