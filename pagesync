@@ -1,0 +1,15 @@
+#!/usr/bin/sh
+
+if ! command -v git >/dev/null 2>&1; then
+    echo "git not available. Install git."
+    exit 1
+fi
+
+pkgdb_root="$(git rev-parse --show-toplevel)"
+    echo "Here's the repo root: $pkgdb_root"
+
+cd $pkgdb_root 2>/dev/null || exit 1
+    echo "Safely in repo root!"
+
+pkgdirs="$(find -maxdepth 1 -type d)"
+    echo "Here's the PKGDIRS: $pkgdirs"
