@@ -1,5 +1,31 @@
 #!/usr/bin/sh
 
+format() {
+"<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preload" href="fonts/CascadiaCode-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../styles.css">
+  <title>Page title</title>
+</head>
+<body>
+  <main class="page">
+    <h1>Church1776's Void Repository</h1>
+    <h2>Navigation</h2>
+    <ul class="files">
+      <li><a href="../">Home</a></li>
+    </ul>
+    <h2>Files</h2>
+    <ul class="files">
+      <li><a href="../">..</a></li>
+    </ul>
+  </main>
+</body>
+</html>"
+}
+
 if ! command -v git >/dev/null 2>&1; then
     echo "git not available. Install git."
     exit 1
@@ -13,3 +39,4 @@ cd $pkgdb_root 2>/dev/null || exit 1
 
 pkgdirs="$(find -maxdepth 1 -type d)"
     echo "Here's the PKGDIRS: $pkgdirs"
+
