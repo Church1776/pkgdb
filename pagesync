@@ -1,26 +1,100 @@
-#!/usr/bin/sh
+#!/usr/bin/zsh
 
-validate() {
-  :
+function reset_index {
+  if [[ ! -f index.old.html ]]; then
+    cp index.html index.old.html
+    return
+  fi
+  if [[ index.html -nt index.old.html ]]; then
+    cp index.html index.old.html
+    return
+  fi
 }
-update() {
-  :
+function grab_old_idx {
+  cat $1
 }
-format() {
-  :
+function build_index {
+  local idx_old_file=""
+  local idx_dir=""
+  local ln_fmt=''
+  local in_head=0
+  local in_body=0
+  
+  local args=("$@")
+
+  if [[ -z $args ]]; then
+    args=($(find . \( -name '.?*' -o -name fonts \) -prune -o -type d -print | sed 's|./||g'))
+    for a in $args; do
+      idx_dir="$a"
+      idx_old_file="$a/index.html"
+      echo "$idx_dir" "$idx_old_file"
+    done
+
+    return
+  fi
+
+  echo '' > index.tmp.html
+  while IFS= read -r line; do
+    sleep 0.05
+    if [[ $line == *'<head>'* ]]; then
+      in_head=1
+    elif [[ $line == *'</head>' ]]; then
+      in_head=0
+      ln_fmt=''
+    elif [[ $line == *'<body>' ]]; then
+      in_body=1
+    elif [[ $line == *'</body>' ]]; then
+      in_body=0
+      ln_fmt=''
+    fi
+    if [[ $in_head == 1 || $in_body == 1 ]]; then
+      if [[ $line == *'<'*'</'* ]]; then
+        ln_fmt="${ln_fmt}"
+      elif [[ $line == *'<'* && $line != *'</'* && $line != *'<meta'* && $line != *'<link'* ]]; then
+        ln_fmt="${ln_fmt}##"
+      elif [[ $line == *'</'* ]]; then
+        ln_fmt="${ln_fmt#'##'}"
+      fi
+    fi
+    if [[ $line == *'<ul'* ]]; then
+      in_ul=1
+    elif [[ $line == *'</ul>'* ]]; then
+      in_ul=3
+    fi
+    if [[ $in_ul == 1 ]]; then
+      in_ul=2
+      #echo "Inside unordered list."
+      echo "'$ln_fmt' $line"
+      echo $line >> index.tmp.html
+    elif [[ $in_ul == 3 ]]; then
+      in_ul=0
+      #echo "Leaving unordered list."
+      echo "'$ln_fmt' $line"
+      echo $line >> index.tmp.html
+    elif [[ $in_ul == 2 ]]; then
+      #continue
+      echo "'$ln_fmt' $line"
+      echo $line >> index.tmp.html
+    else
+      echo "'$ln_fmt' $line"
+      echo $line >> index.tmp.html
+    fi
+  done <<< $idx_old_file
 }
 
-if ! command -v git >/dev/null 2>&1; then
-  echo "git not available. Install git."
-  exit 1
+if [[ ${zsh_eval_context[-1]} == file ]]; then
+  printf '%s\n' \
+  'This file is not meant to be sourced.' \
+  'Execute this file for correct usage.'
+  return
 fi
 
 pkgdb_root="$(git rev-parse --show-toplevel)"
-  echo "Here's the repo root: $pkgdb_root"
 
-cd $pkgdb_root 2>/dev/null || exit 1
-  echo "Safely in repo root!"
+if [[ $PWD != $pkgdb_root ]]; then
+  cd $pkgdb_root
+fi
 
-pkgdirs="$(find -maxdepth 1 -type d)"
-  echo "Here's the PKGDIRS: $pkgdirs"
+reset_index
 
+build_index
