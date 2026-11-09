@@ -1,86 +1,6 @@
 #!/usr/bin/zsh
 
-function reset_index {
-  if [[ ! -f index.old.html ]]; then
-    cp index.html index.old.html
-    return
-  fi
-  if [[ index.html -nt index.old.html ]]; then
-    cp index.html index.old.html
-    return
-  fi
-}
-function grab_old_idx {
-  cat $1
-}
-function build_index {
-  local idx_old_file=""
-  local idx_dir=""
-  local ln_fmt=''
-  local in_head=0
-  local in_body=0
-  
-  local args=("$@")
-
-  if [[ -z $args ]]; then
-    args=($(find . \( -name '.?*' -o -name fonts \) -prune -o -type d -print | sed 's|./||g'))
-    for a in $args; do
-      idx_dir="$a"
-      idx_old_file="$a/index.html"
-      echo "$idx_dir" "$idx_old_file"
-    done
-
-    return
-  fi
-
-  echo '' > index.tmp.html
-  while IFS= read -r line; do
-    sleep 0.05
-    if [[ $line == *'<head>'* ]]; then
-      in_head=1
-    elif [[ $line == *'</head>' ]]; then
-      in_head=0
-      ln_fmt=''
-    elif [[ $line == *'<body>' ]]; then
-      in_body=1
-    elif [[ $line == *'</body>' ]]; then
-      in_body=0
-      ln_fmt=''
-    fi
-    if [[ $in_head == 1 || $in_body == 1 ]]; then
-      if [[ $line == *'<'*'</'* ]]; then
-        ln_fmt="${ln_fmt}"
-      elif [[ $line == *'<'* && $line != *'</'* && $line != *'<meta'* && $line != *'<link'* ]]; then
-        ln_fmt="${ln_fmt}##"
-      elif [[ $line == *'</'* ]]; then
-        ln_fmt="${ln_fmt#'##'}"
-      fi
-    fi
-    if [[ $line == *'<ul'* ]]; then
-      in_ul=1
-    elif [[ $line == *'</ul>'* ]]; then
-      in_ul=3
-    fi
-    if [[ $in_ul == 1 ]]; then
-      in_ul=2
-      #echo "Inside unordered list."
-      echo "'$ln_fmt' $line"
-      echo $line >> index.tmp.html
-    elif [[ $in_ul == 3 ]]; then
-      in_ul=0
-      #echo "Leaving unordered list."
-      echo "'$ln_fmt' $line"
-      echo $line >> index.tmp.html
-    elif [[ $in_ul == 2 ]]; then
-      #continue
-      echo "'$ln_fmt' $line"
-      echo $line >> index.tmp.html
-    else
-      echo "'$ln_fmt' $line"
-      echo $line >> index.tmp.html
-    fi
-  done <<< $idx_old_file
-}
+args=("$@")
 
 if [[ ${zsh_eval_context[-1]} == file ]]; then
   printf '%s\n' \
@@ -95,6 +15,71 @@ if [[ $PWD != $pkgdb_root ]]; then
   cd $pkgdb_root
 fi
 
-reset_index
+function format_li_obj {
+  li_obj="$1"
+  li_padding="$2"
+  li_obj="$li_padding<li><a href=\"$li_ibj\">$li_obj</a></li>"
+  echo $li_obj
+}
+function clear_ul_lists {
+  local repo="${1:h}"
+  local idx="${1:t}"
+  local tidx="tmp.$idx"
+  local in_ul
+  echo '' > $repo/$tidx
+  while IFS= read -r line; do
+    if [[ $line == *'</ul'* ]]; then
+      in_ul=0
+    fi
+    if [[ $in_ul == 1 ]]; then
+      continue
+    fi
+    echo $line >> $repo/$tidx
+    if [[ $line == *'<ul'* ]]; then
+      in_ul=1
+    fi
+  done < "$repo/$idx"
+}
+function update_ul_lists {
+  local repo="${1:h}"
+  local idx="${1:t}"
+  local tidx="tmp.$idx"
+  local in_ul ul_padding tmp_ln
+  objs=($(find $repo -maxdepth 1 ! -name '*.html' ! -name '*.css' ! -name 'pagesync' ))
+  echo '' > $repo/$tidx
+  while IFS= read -r line; do
+    if [[ $line == *'</ul'* ]]; then
+      in_ul=0
+      ul_padding=''
+    fi
+    if [[ $in_ul == 1 ]]; then
+      for o in ${objs[@]}; do
+        if [[ $o == $repo ]]; then
+          continue
+        fi
+        format_li_obj "$o" "$ul_padding"
+      done
+    else
+      echo $line >> $repo/$tidx
+    fi
+    if [[ $line == *'<ul'* ]]; then
+      in_ul=1
+      tmp_ln="$line"
+      while [[ ${tmp_ln[1]} == ' ' ]]; do
+        ul_padding+=' '
+        tmp_ln=${tmp_ln# }
+      done
+      ul_padding+='  '
+    fi
+  done < "$repo/$idx"
+}
 
-build_index
+pages=($(find . -path .git -path fonts -prune -o -name index.html | sed 's|\./||g' ))
+
+#echo ${pages[@]}
+
+for page in "${pages[@]}"; do
+  echo $page
+  clear_ul_lists $page
+  update_ul_lists $page
+done
