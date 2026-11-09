@@ -3,36 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
   <link rel="preload" href="fonts/CascadiaMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <title>Church1776's Package Database</title>
-  <style type="text/css">
-    @font-face { font-family: "Cascadia Mono"; src: url("fonts/CascadiaMono-Regular.woff2") format("woff2"); font-weight: 400; font-display: block;}
-    html {color-scheme: light dark;}
-    body {margin: 0; min-height: 100vh; font-family: "Cascadia Mono", system-ui; line-height: 1.1; background: Canvas; color: CanvasText;}
-    h1 {font-size: 1.75rem; letter-spacing: -0.03em; margin: 0.0 0.0rem;}
-    h2 {font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.00em; color: darkgray; margin: 0.0rem 0 0.25rem;}
-    p {margin: 0.0rem 0.0rem; color: grey;}
-    .files {list-style: none; margin: 0; padding: 0; border: 0px solid color-mix(in srgb, CanvasText 12%, Canvas); border-radius: 0.0rem; overflow: auto;}
-    .files a { display: block; padding: 0.25rem 1rem; text-decoration: none; color: LinkText;}
-    .files a:hover { background: color-mix(in srgb, CanvasText 8%, Canvas); color: color-mix(in srgb, CanvasText 90%, Canvas);}
-    .note {white-space: pre-line; margin: 0.5rem 1rem;}
-    .page {max-width: 100rem; margin: 1 auto; padding: 1.1rem 1.25rem;}
-  </style>
 </head>
 <body>
   <main class="page">
     <h1>Church1776's Package Database</h1>
-    <p class="note">Welcome to my simple database. The following directories act as my package repos for the environments I develop in.
-      If you find anything useful awesome!!! If you have any suggestions I'll be happy to hear them. If you just want to
-      curse me out go ahead. I'll play along. Sometimes we all just need to argue over nothing anyways.
+    <p class="note">Welcome to my simple database. The following directories
+      act as my package repos for the environments I develop in.
+      If you find anything useful awesome!!!
     </p>
     <h2>Repositories</h2>
+    <p class="note">Windows</p>
     <ul class="files">
-      <li><a href="arch/">arch/</a></li>
-      <li><a href="debian/">debian/</a></li>
-      <li><a href="fedora/">fedora/</a></li>
-      <li><a href="msys2/">msys2/</a></li>
-      <li><a href="void/">void/</a></li>
+      <li><a href="msys2/">Msys2</a></li>
+      <li><a href="msvc/">MSVC</a></li>
+    </ul>
+    <p class="note">Linux</p>
+    <ul class="files">
+      <li><a href="arch/">Arch</a></li>
+      <li><a href="debian/">Debian</a></li>
+      <li><a href="fedora/">Fedora</a></li>
+      <li><a href="void/">Void</a></li>
     </ul>
   </main>
 </body>
