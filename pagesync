@@ -1,6 +1,13 @@
 #!/usr/bin/zsh
 
 args=("$@")
+make_backups=0
+for arg in "${args[@]}"; do
+  case $arg in
+    --backup)make_backups=1;;
+    *)echo "unknown option.";;
+  esac
+done
 
 if [[ ${zsh_eval_context[-1]} == file ]]; then
   printf '%s\n' \
@@ -15,71 +22,92 @@ if [[ $PWD != $pkgdb_root ]]; then
   cd $pkgdb_root
 fi
 
-function format_li_obj {
-  li_obj="$1"
-  li_padding="$2"
-  li_obj="$li_padding<li><a href=\"$li_ibj\">$li_obj</a></li>"
-  echo $li_obj
-}
-function clear_ul_lists {
-  local repo="${1:h}"
-  local idx="${1:t}"
-  local tidx="tmp.$idx"
-  local in_ul
-  echo '' > $repo/$tidx
-  while IFS= read -r line; do
-    if [[ $line == *'</ul'* ]]; then
-      in_ul=0
-    fi
-    if [[ $in_ul == 1 ]]; then
-      continue
-    fi
-    echo $line >> $repo/$tidx
-    if [[ $line == *'<ul'* ]]; then
-      in_ul=1
-    fi
-  done < "$repo/$idx"
-}
-function update_ul_lists {
-  local repo="${1:h}"
-  local idx="${1:t}"
-  local tidx="tmp.$idx"
-  local in_ul ul_padding tmp_ln
-  objs=($(find $repo -maxdepth 1 ! -name '*.html' ! -name '*.css' ! -name 'pagesync' ))
-  echo '' > $repo/$tidx
-  while IFS= read -r line; do
-    if [[ $line == *'</ul'* ]]; then
-      in_ul=0
-      ul_padding=''
-    fi
-    if [[ $in_ul == 1 ]]; then
-      for o in ${objs[@]}; do
-        if [[ $o == $repo ]]; then
-          continue
-        fi
-        format_li_obj "$o" "$ul_padding"
+pages=($(find . -name index.html | sed 's|\./||g'))
+winrepos=()
+linuxrepos=()
+macosrepos=()
+for page in ${pages[@]}; do
+  repo="${page:h}"
+  html_dir="$repo/html"
+  cp $repo/${page:t} $html_dir/old.${page:t}
+  if [[ ! -f "$html_dir/backup.${page:t}" || $make_backups == 1 ]]; then
+    cp $repo/${page:t} $html_dir/backup.${page:t}
+  fi
+  echo '' > $repo/${page:t}
+  if [[ $page == index.html ]]; then
+    echo './'
+    repos=($(find . -maxdepth 1 -type d ! -name '.' ! -name fonts ! -name .git ! -name html | sed "s|\./||g"))
+    cat $html_dir/prerepos.html >> $page
+    for repo in ${repos[@]}; do
+      if [[ ! -f "$repo/${page:t}" ]]; then
+        touch "$repo/${page:t}"
+        cat "$html_dir/prelist.html" >> "$repo/${page:t}"
+        cat "$html_dir/postlist.html" >> "$repo/${page:t}"
+      fi
+      if [[ $repo == 'msvc' || $repo == 'msys2' ]]; then
+        list_slider=1
+        repo="${repo//msvc/MSVC}"
+      elif [[ $repo == 'macos' || $repo == 'lima' ]]; then
+        list_slider=2
+        repo="${repo//macos/MacOS}"
+      elif [[ $repo == *'bsd' ]]; then
+        list_slider=3
+        repo="${repo//bsd/BSD}"
+      else
+        list_slider=0
+      fi
+      repo="      <li><a href=\"${repo:l}/\">${(U)repo[1]}${repo[2,-1]}</a></li>"
+      if [[ $list_slider == 1 ]]; then
+        winrepos+=($repo)
+      elif [[ $list_slider == 2 ]]; then
+        macosrepos+=($repo)
+      elif [[ $list_slider == 3 ]]; then
+        bsdrepos+=($repo)
+      else
+        linuxrepos+=($repo)
+      fi
+    done
+    if [[ -n $winrepos ]]; then
+      cat $html_dir/winrepos.html >> $page
+      for wr in ${winrepos[@]}; do
+        echo $wr >> $page
       done
-    else
-      echo $line >> $repo/$tidx
     fi
-    if [[ $line == *'<ul'* ]]; then
-      in_ul=1
-      tmp_ln="$line"
-      while [[ ${tmp_ln[1]} == ' ' ]]; do
-        ul_padding+=' '
-        tmp_ln=${tmp_ln# }
+    if [[ -n $linuxrepos ]]; then
+      cat $html_dir/linuxrepos.html >> $page
+      for lr in ${linuxrepos[@]}; do
+        echo $lr >> $page
       done
-      ul_padding+='  '
     fi
-  done < "$repo/$idx"
-}
-
-pages=($(find . -path .git -path fonts -prune -o -name index.html | sed 's|\./||g' ))
-
-#echo ${pages[@]}
-
-for page in "${pages[@]}"; do
-  echo $page
-  clear_ul_lists $page
-  update_ul_lists $page
+    if [[ -n $macosrepos ]]; then
+      cat $html_dir/macosrepos.html >> $page
+      for mr in ${macosrepos[@]}; do
+        echo $mr >> $page
+      done
+    fi
+    if [[ -n $bsdrepos ]]; then
+      cat $html_dir/bsdrepos.html >> $page
+      for br in ${bsdrepos[@]}; do
+        echo $br >> $page
+      done
+    fi
+    cat $html_dir/postrepos.html >> $page
+    continue
+  fi
+  echo "$repo/"
+  pkgs=($(find $repo ! -name '*.html' ! -name $repo -type f | sed "s|$repo/||g"))
+  if [[ -z $pkgs ]]; then
+    set_empty_msg=1
+  fi
+  cat "$html_dir/prelist.html" > "$repo/${page:t}"
+  for p in ${pkgs[@]}; do
+    p="      <li><a href=\"$p\">$p</a></li>"
+    echo $p >> "$repo/${page:t}"
+  done
+  if [[ $set_empty_msg == 1 ]]; then
+    set_empty_msg=0
+    echo "  <li><a href=\"../\">  No files have been added." >> "$repo/${page:t}"
+    echo "Check back later for updates.</a></li>" >> "$repo/${page:t}"
+  fi
+  cat "$html_dir/postlist.html" >> "$repo/${page:t}"
 done
