@@ -36,7 +36,7 @@ for page in ${pages[@]}; do
   echo '' > $repo/${page:t}
   if [[ $page == index.html ]]; then
     echo './'
-    repos=($(find . -maxdepth 1 -type d ! -name '.' ! -name fonts ! -name .git ! -name html | sed "s|\./||g"))
+    repos=($(find . -maxdepth 1 -type d ! -name '.' ! -name fonts ! -name .git ! -name html ! -name pkg | sed "s|\./||g"))
     cat $html_dir/prerepos.html >> $page
     for repo in ${repos[@]}; do
       if [[ ! -f "$repo/${page:t}" ]]; then
