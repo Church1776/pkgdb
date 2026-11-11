@@ -26,7 +26,7 @@ pages=($(find . -name index.html | sed 's|\./||g'))
 winrepos=()
 linuxrepos=()
 macosrepos=()
-for page in ${pages[@]}; do
+for page in ${(@o)pages[@]}; do
   repo="${page:h}"
   html_dir="$repo/html"
   cp $repo/${page:t} $html_dir/old.${page:t}
@@ -55,6 +55,10 @@ for page in ${pages[@]}; do
         repo="${repo//bsd/BSD}"
       else
         list_slider=0
+      fi
+      repo_contents=($(find ${repo:l} ! -name '*.html' ! -name $repo -type f))
+      if [[ -z $repo_contents ]]; then
+        continue
       fi
       repo="      <li><a href=\"${repo:l}/\">${(U)repo[1]}${repo[2,-1]}</a></li>"
       if [[ $list_slider == 1 ]]; then
@@ -92,6 +96,9 @@ for page in ${pages[@]}; do
       done
     fi
     cat $html_dir/postrepos.html >> $page
+    continue
+  fi
+  if [[ ! -d $repo ]]; then
     continue
   fi
   echo "$repo/"

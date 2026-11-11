@@ -1,0 +1,896 @@
+.boundary_a {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #ce0909;
+}
+.boundary_abbr {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #1547c1;
+}
+.boundary_address {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #77b422;
+}
+.boundary_area {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #a72f98;
+}
+.boundary_article {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #0af0c9;
+}
+.boundary_aside {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #e18519;
+}
+.boundary_audio {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #5228d2;
+}
+.boundary_b {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #3dc337;
+}
+.boundary_base {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #f6286d;
+}
+.boundary_bdi {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #35a5e9;
+}
+.boundary_bdo {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #cfdb43;
+}
+.boundary_blockquote {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #b350ce;
+}
+.boundary_body {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #4af7a0;
+}
+.boundary_br {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #ec7455;
+}
+.boundary_button {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #606be1;
+}
+.boundary_canvas {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #94d56c;
+}
+.boundary_caption {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #f96cca;
+}
+.boundary_cite {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #75ebf0;
+}
+.boundary_code {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #e7cc7e;
+}
+.boundary_col {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #af88dd;
+}
+.boundary_colgroup {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #09ce29;
+}
+.boundary_data {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #c1152b;
+}
+.boundary_datalist {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #225fb4;
+}
+.boundary_dd {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #84a72f;
+}
+.boundary_del {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #ef0af0;
+}
+.boundary_details {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #19e1a6;
+}
+.boundary_dfn {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #d26e28;
+}
+.boundary_dialog {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #4837c3;
+}
+.boundary_div {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #4bf628;
+}
+.boundary_dl {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #e93588;
+}
+.boundary_dt {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #43b6db;
+}
+.boundary_em {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #cec850;
+}
+.boundary_embed {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #bd4af7;
+}
+.boundary_fieldset {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #55ec8d;
+}
+.boundary_figcaption {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #e16b60;
+}
+.boundary_figure {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #6c82d5;
+}
+.boundary_footer {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #b3f96c;
+}
+.boundary_form {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #f075d7;
+}
+.boundary_h1 {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #7ee7dd;
+}
+.boundary_h2 {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #ddbd88;
+}
+.boundary_h3 {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #4909ce;
+}
+.boundary_h4 {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #15c11c;
+}
+.boundary_h5 {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #b42247;
+}
+.boundary_h6 {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #2f71a7;
+}
+.boundary_head {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #cbf00a;
+}
+.boundary_header {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #c719e1;
+}
+.boundary_hgroup {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #28d28a;
+}
+.boundary_hr {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #c35f37;
+}
+.boundary_html {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #2829f6;
+}
+.boundary_i {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #6be935;
+}
+.boundary_iframe {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #db439d;
+}
+.boundary_img {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #50bfce;
+}
+.boundary_input {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #f7d94a;
+}
+.boundary_ins {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #a655ec;
+}
+.boundary_kbd {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #60e180;
+}
+.boundary_label {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #d56c71;
+}
+.boundary_legend {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #6c9cf9;
+}
+.boundary_li {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #2741d7;
+}
+.boundary_link {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #e77edf;
+}
+.boundary_main {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #88ddcb;
+}
+.boundary_map {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #ce6a09;
+}
+.boundary_mark {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #3815c1;
+}
+.boundary_menu {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #30b422;
+}
+.boundary_meta {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #a72f5d;
+}
+.boundary_meter {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #0aa5f0;
+}
+.boundary_nav {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #dae119;
+}
+.boundary_noscript {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #a628d2;
+}
+.boundary_object {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #37c376;
+}
+.boundary_ol {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #f64828;
+}
+.boundary_optgroup {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #354de9;
+}
+.boundary_option {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #83db43;
+}
+.boundary_output {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #ce50aa;
+}
+.boundary_p {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #4af7f6;
+}
+.boundary_picture {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #ecbf55;
+}
+.boundary_pre {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #9560e1;
+}
+.boundary_progress {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #6cd578;
+}
+.boundary_q {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #f96c85;
+}
+.boundary_rp {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #75aff0;
+}
+.boundary_rt {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #cee77e;
+}
+.boundary_ruby {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #d988dd;
+}
+.boundary_s {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #09ce8a;
+}
+.boundary_samp {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #c15415;
+}
+.boundary_script {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #2d22b4;
+}
+.boundary_search {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #49a72f;
+}
+.boundary_section {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #f00a7f;
+}
+.boundary_select {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #19b9e1;
+}
+.boundary_slot {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #d2c228;
+}
+.boundary_small {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #8d37c3;
+}
+.boundary_source {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #28f66a;
+}
+.boundary_span {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #e93a35;
+}
+.boundary_strong {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #436adb;
+}
+.boundary_style {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #96ce50;
+}
+.boundary_sub {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #f74add;
+}
+.boundary_summary {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #55ecd7;
+}
+.boundary_sup {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #e1aa60;
+}
+.boundary_table {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #896cd5;
+}
+.boundary_tbody {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #6ef96c;
+}
+.boundary_td {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #f0759b;
+}
+.boundary_template {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #7ebce7;
+}
+.boundary_textarea {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #d4dd88;
+}
+.boundary_tfoot {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #aa09ce;
+}
+.boundary_th {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #15c170;
+}
+.boundary_thead {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #b44522;
+}
+.boundary_time {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #2f36a7;
+}
+.boundary_title {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #5af00a;
+}
+.boundary_tr {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #e11999;
+}
+.boundary_track {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #28c6d2;
+}
+.boundary_u {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #c3a437;
+}
+.boundary_ul {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #8c28f6;
+}
+.boundary_var {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #35e958;
+}
+.boundary_video {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #db4351;
+}
+.boundary_wbr {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid #5081ce;
+}

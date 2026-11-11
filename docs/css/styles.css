@@ -1,0 +1,306 @@
+@font-face {
+  font-family: "Cascadia Mono";
+  src: url("fonts/CascadiaMono-Regular.woff2")
+  format("woff2");
+  font-weight: 400;
+  font-display: block;
+}
+html {
+  color-scheme: light dark;
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}
+body {
+  margin: 0;
+  min-height: 100vw;
+  font-family: "Cascadia Mono", system-ui;
+  line-height: 1.1;
+  background: Canvas;
+  color: CanvasText;
+}
+h1 {
+  font-size: 1.75rem;
+  letter-spacing: -0.03em;
+  margin: 0.0 0.0rem;
+}
+h2 {
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.00em;
+  color: darkgray;
+  margin: 0.0rem 0 0.25rem;
+}
+h3 {font-size: 1rem;
+  letter-spacing: 0;
+  margin: 0.5rem 0 0.25rem;
+  color: CanvasText;
+}
+h4 {font-size: 0.95rem;
+  margin: 0.5rem 0 0.25rem;
+}
+h5, h6 {font-size: 0.85rem;
+  margin: 0.5rem 0 0.25rem;
+  color: grey;
+}
+p {margin: 0.0rem 0.0rem;
+  color: grey;
+}
+.boundary_main {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid GrayText;
+}
+.boundary_body {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid whitesmoke;
+}
+.boundary_h1 {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid red;
+}
+.boundary_h2 {
+  width: 100vw;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.0;
+  padding: 0rem 0rem;
+  border: 2px solid green;
+}
+.files {
+  border: 2px solid GrayText;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 0px solid color-mix(in srgb, CanvasText 12%, Canvas);
+  border-radius: 0.0rem;
+  overflow: auto;
+  a {
+    display: block;
+    padding: 0.25rem 1rem;
+    text-decoration: none;
+    color: LinkText;
+    &:hover {
+      background: color-mix(in srgb, CanvasText 8%, Canvas);
+      color: color-mix(in srgb, CanvasText 90%, Canvas);
+    }
+    &:visited {
+      color: VisitedText;
+    }
+    &:focus-visible {
+      outline: 2px solid LinkText;
+      outline-offset: 2px;
+    }
+  }
+}
+.note {
+  border: 2px solid GrayText;
+  white-space: pre-line;
+  margin: 0rem 0rem;
+}
+.page {
+  border: 2px solid GrayText;
+  max-width: 100rem;
+  margin: 1 auto;
+  padding: 1.1rem 1.25rem;
+}
+
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+:root {
+  font-size: 100%;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  tab-size: 4;
+}
+
+main, header, footer, nav, article, section, aside {
+  display: block;
+  max-width: 100rem;
+  margin: 1rem auto;
+  padding: 1.1rem 1.25rem;
+}
+
+
+ul, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+li {
+  margin: 0;
+  padding: 0;
+}
+dl {
+  margin: 0.5rem 0;
+}
+dt {
+  font-weight: 700;
+  margin: 0.25rem 0 0;
+}
+dd {
+  margin: 0 0 0.25rem 1rem;
+  color: grey;
+}
+
+blockquote {
+  margin: 0.5rem 0;
+  padding: 0.25rem 1rem;
+  border-inline-start: 3px solid color-mix(in srgb, CanvasText 20%, Canvas);
+  color: grey;
+}
+hr {
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, CanvasText 12%, Canvas);
+  margin: 1rem 0;
+}
+
+pre, code, kbd, samp {
+  font-family: "Cascadia Mono", ui-monospace, monospace;
+}
+code, kbd, samp {
+  font-size: 0.95em;
+}
+pre {
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  overflow: auto;
+  background: color-mix(in srgb, CanvasText 6%, Canvas);
+}
+pre code {
+  padding: 0;
+  background: none;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.5rem 0;
+}
+caption {
+  text-align: start;
+  color: grey;
+  margin-bottom: 0.25rem;
+}
+th, td {
+  padding: 0.25rem 1rem;
+  text-align: start;
+  border-bottom: 1px solid color-mix(in srgb, CanvasText 12%, Canvas);
+}
+th {
+  font-weight: 700;
+  color: darkgray;
+  text-transform: uppercase;
+}
+
+img, svg, video {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+figure {
+  margin: 0.5rem 0;
+}
+figcaption {
+  color: grey;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+em {
+  font-style: italic;
+}
+strong, b {
+  font-weight: 700;
+}
+small, sub, sup {
+  font-size: 0.8em;
+}
+mark {
+  background: Mark;
+  color: MarkText;
+  padding: 0 0.15em;
+}
+abbr {
+  text-decoration: underline dotted;
+}
+time, data, var {
+  font-style: normal;
+}
+del {
+  text-decoration: line-through;
+  color: grey;
+}
+ins {
+  text-decoration: underline;
+  color: CanvasText;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+  background: Canvas;
+  border: 1px solid color-mix(in srgb, CanvasText 20%, Canvas);
+  padding: 0.25rem 0.5rem;
+}
+button {
+  cursor: pointer;
+  color: LinkText;
+}
+button:hover {
+  background: color-mix(in srgb, CanvasText 8%, Canvas);
+}
+label {
+  display: block;
+  margin: 0.25rem 0;
+}
+fieldset {
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid color-mix(in srgb, CanvasText 12%, Canvas);
+}
+legend {
+  padding: 0 0.25rem;
+  color: darkgray;
+}
+
+address {
+  font-style: normal;
+  margin: 0.5rem 0;
+  color: grey;
+}
+details {
+  margin: 0.25rem 0;
+}
+summary {
+  cursor: pointer;
+  color: LinkText;
+  padding: 0.25rem 1rem;
+}
+summary:hover {
+  background: color-mix(in srgb, CanvasText 8%, Canvas);
+}
+
+:target {
+  background: color-mix(in srgb, CanvasText 8%, Canvas);
+}
+::selection {
+  background: Highlight;
+  color: HighlightText;
+}
