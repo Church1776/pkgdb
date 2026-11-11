@@ -38,16 +38,16 @@ for page in ${pages[@]}; do
     echo './'
     repos=($(find . -maxdepth 1 -type d ! -name '.' ! -name fonts ! -name .git ! -name html ! -name pkg | sed "s|\./||g"))
     cat $html_dir/prerepos.html >> $page
-    for repo in ${repos[@]}; do
+    for repo in ${(@o)repos[@]}; do
       if [[ ! -f "$repo/${page:t}" ]]; then
         touch "$repo/${page:t}"
         cat "$html_dir/prelist.html" >> "$repo/${page:t}"
         cat "$html_dir/postlist.html" >> "$repo/${page:t}"
       fi
-      if [[ $repo == 'msvc' || $repo == 'msys2' ]]; then
+      if [[ $repo == 'msvc' || $repo == 'msys2' || $repo == 'cygwin' ]]; then
         list_slider=1
         repo="${repo//msvc/MSVC}"
-      elif [[ $repo == 'macos' || $repo == 'lima' ]]; then
+      elif [[ $repo == 'darwin' || $repo == 'lima' ]]; then
         list_slider=2
         repo="${repo//macos/MacOS}"
       elif [[ $repo == *'bsd' ]]; then
