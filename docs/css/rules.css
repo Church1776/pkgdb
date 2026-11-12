@@ -1,0 +1,321 @@
+/* CSS at-rule catalog. Descriptor values are spec defaults where they exist. */
+/* Statement at-rules (@charset, @import, @namespace, @custom-media) do not */
+/* take a {} block in real CSS; they are shown in this file's block format */
+/* as a reference only. Nested-only rules must live inside their parent. */
+
+@charset {
+  encoding: "utf-8";
+}
+
+@import {
+  url: url("sheet.css");
+  layer: none;
+  supports: none;
+  media: all;
+}
+
+@namespace {
+  prefix: none;
+  url: url("");
+}
+
+@custom-media {
+  name: --media;
+  query: all;
+}
+
+@custom-selector {
+  name: --selector;
+  selector: *;
+}
+
+@layer {
+  order: none;
+}
+
+@media {
+  media: all;
+}
+
+@supports {
+  condition: none;
+}
+
+@container {
+  name: none;
+  condition: none;
+}
+
+@scope {
+  scope-start: none;
+  scope-end: none;
+}
+
+@starting-style {
+}
+
+@when {
+  condition: none;
+}
+
+@else {
+  condition: none;
+}
+
+@page {
+  size: auto;
+  page-orientation: upright;
+  marks: none;
+  bleed: auto;
+  margin: auto;
+}
+
+@top-left-corner {
+  content: none;
+  vertical-align: middle;
+  text-align: right;
+}
+
+@top-left {
+  content: none;
+  vertical-align: middle;
+  text-align: left;
+}
+
+@top-center {
+  content: none;
+  vertical-align: middle;
+  text-align: center;
+}
+
+@top-right {
+  content: none;
+  vertical-align: middle;
+  text-align: right;
+}
+
+@top-right-corner {
+  content: none;
+  vertical-align: middle;
+  text-align: left;
+}
+
+@left-top {
+  content: none;
+  vertical-align: top;
+  text-align: center;
+}
+
+@left-middle {
+  content: none;
+  vertical-align: middle;
+  text-align: center;
+}
+
+@left-bottom {
+  content: none;
+  vertical-align: bottom;
+  text-align: center;
+}
+
+@right-top {
+  content: none;
+  vertical-align: top;
+  text-align: center;
+}
+
+@right-middle {
+  content: none;
+  vertical-align: middle;
+  text-align: center;
+}
+
+@right-bottom {
+  content: none;
+  vertical-align: bottom;
+  text-align: center;
+}
+
+@bottom-left-corner {
+  content: none;
+  vertical-align: middle;
+  text-align: right;
+}
+
+@bottom-left {
+  content: none;
+  vertical-align: middle;
+  text-align: left;
+}
+
+@bottom-center {
+  content: none;
+  vertical-align: middle;
+  text-align: center;
+}
+
+@bottom-right {
+  content: none;
+  vertical-align: middle;
+  text-align: right;
+}
+
+@bottom-right-corner {
+  content: none;
+  vertical-align: middle;
+  text-align: left;
+}
+
+@footnote {
+  content: none;
+}
+
+@font-face {
+  font-family: none;
+  src: none;
+  font-style: normal;
+  font-weight: normal;
+  font-stretch: normal;
+  font-width: normal;
+  font-display: auto;
+  unicode-range: U+0-10FFFF;
+  font-variant: normal;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  font-named-instance: auto;
+  font-language-override: normal;
+  ascent-override: normal;
+  descent-override: normal;
+  line-gap-override: normal;
+  size-adjust: 100%;
+}
+
+@font-feature-values {
+  font-family: none;
+}
+
+@stylistic {
+}
+
+@historical-forms {
+}
+
+@styleset {
+}
+
+@character-variant {
+}
+
+@swash {
+}
+
+@ornaments {
+}
+
+@annotation {
+}
+
+@font-palette-values {
+  font-family: none;
+  base-palette: light;
+  override-colors: none;
+}
+
+@keyframes {
+  from: none;
+  to: none;
+}
+
+@-webkit-keyframes {
+  from: none;
+  to: none;
+}
+
+@counter-style {
+  system: symbolic;
+  negative: "-";
+  prefix: "";
+  suffix: ". ";
+  range: auto;
+  pad: 0 "";
+  fallback: decimal;
+  symbols: none;
+  additive-symbols: none;
+  speak-as: auto;
+}
+
+@property {
+  syntax: "*";
+  inherits: false;
+  initial-value: none;
+}
+
+@color-profile {
+  src: none;
+  rendering-intent: relative-colorimetric;
+  components: none;
+}
+
+@position-try {
+  position-area: none;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  inset: auto;
+  margin: auto;
+  align-self: auto;
+  justify-self: auto;
+}
+
+@view-transition {
+  navigation: none;
+  types: none;
+}
+
+@function {
+  result: none;
+}
+
+@mixin {
+}
+
+@apply {
+}
+
+@document {
+  url: url("");
+  url-prefix: url("");
+  domain: "";
+  media-document: all;
+  regexp: "";
+}
+
+@viewport {
+  min-width: auto;
+  max-width: auto;
+  width: auto;
+  min-height: auto;
+  max-height: auto;
+  height: auto;
+  zoom: auto;
+  min-zoom: auto;
+  max-zoom: auto;
+  user-zoom: zoom;
+  orientation: auto;
+  viewport-fit: auto;
+}
+
+@-ms-viewport {
+  width: auto;
+  height: auto;
+}
+
+@nest {
+}
+
+@scroll-timeline {
+  source: auto;
+  orientation: auto;
+  scroll-offsets: none;
+}
