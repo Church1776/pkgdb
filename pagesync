@@ -17,6 +17,11 @@ if [[ ${zsh_eval_context[-1]} == file ]]; then
 fi
 
 pkgdb_root="$(git rev-parse --show-toplevel)"
+if [[ $pkgdb_root == [a-zA-Z]':'* ]]; then
+  if [[ ${+commands[cygpath]} ]]; then
+    pkgdb_root="$(cygpath -u $pkgdb_root)"
+  fi
+fi
 
 if [[ $PWD != $pkgdb_root ]]; then
   cd $pkgdb_root
@@ -28,21 +33,22 @@ linuxrepos=()
 macosrepos=()
 for page in ${(@o)pages[@]}; do
   repo="${page:h}"
+  page="${page:t}"
   html_dir="$repo/html"
-  cp $repo/${page:t} $html_dir/old.${page:t}
-  if [[ ! -f "$html_dir/backup.${page:t}" || $make_backups == 1 ]]; then
-    cp $repo/${page:t} $html_dir/backup.${page:t}
+  cp $repo/${page} $html_dir/old.${page}
+  if [[ ! -f "$html_dir/backup.${page}" || $make_backups == 1 ]]; then
+    cp $repo/${page} $html_dir/backup.${page}
   fi
-  echo '' > $repo/${page:t}
-  if [[ $page == index.html ]]; then
-    echo './'
-    repos=($(find . -maxdepth 1 -type d ! -name '.' ! -name fonts ! -name .git ! -name html ! -name pkg | sed "s|\./||g"))
-    cat $html_dir/prerepos.html >> $page
+  echo "$repo/"
+  echo '' > $repo/${page}
+  if [[ ${${page:A}//$pkgdb_root/.} == "${${repo:A}//$pkgdb_root/.}/$page" ]]; then
+    repos=($(find . -maxdepth 1 -type d ! -name '.' ! -name fonts ! -name .git ! -name html ! -name pkg ! -name docs | sed "s|\./||g"))
+    cat $html_dir/prerepos.html >> $repo/$page
     for repo in ${(@o)repos[@]}; do
-      if [[ ! -f "$repo/${page:t}" ]]; then
-        touch "$repo/${page:t}"
-        cat "$html_dir/prelist.html" >> "$repo/${page:t}"
-        cat "$html_dir/postlist.html" >> "$repo/${page:t}"
+      if [[ ! -f "$repo/${page}" ]]; then
+        touch "$repo/${page}"
+        cat "$html_dir/prerepos.html" >> "$repo/${page}"
+        cat "$html_dir/postrepos.html" >> "$repo/${page}"
       fi
       if [[ $repo == 'msvc' || $repo == 'msys2' || $repo == 'cygwin' ]]; then
         list_slider=1
@@ -60,15 +66,15 @@ for page in ${(@o)pages[@]}; do
       if [[ -z $repo_contents ]]; then
         continue
       fi
-      repo="      <li><a href=\"${repo:l}/\">${(U)repo[1]}${repo[2,-1]}</a></li>"
+      rep_li="      <li><a href=\"${repo:l}/\">${(U)repo[1]}${repo[2,-1]}</a></li>"
       if [[ $list_slider == 1 ]]; then
-        winrepos+=($repo)
+        winrepos+=($rep_li)
       elif [[ $list_slider == 2 ]]; then
-        macosrepos+=($repo)
+        macosrepos+=($rep_li)
       elif [[ $list_slider == 3 ]]; then
-        bsdrepos+=($repo)
+        bsdrepos+=($rep_li)
       else
-        linuxrepos+=($repo)
+        linuxrepos+=($rep_li)
       fi
     done
     if [[ -n $winrepos ]]; then
@@ -101,20 +107,19 @@ for page in ${(@o)pages[@]}; do
   if [[ ! -d $repo ]]; then
     continue
   fi
-  echo "$repo/"
   pkgs=($(find $repo ! -name '*.html' ! -name $repo -type f | sed "s|$repo/||g"))
   if [[ -z $pkgs ]]; then
     set_empty_msg=1
   fi
-  cat "$html_dir/prelist.html" > "$repo/${page:t}"
+  cat "$html_dir/prelist.html" > "$repo/${page}"
   for p in ${pkgs[@]}; do
     p="      <li><a href=\"$p\">$p</a></li>"
-    echo $p >> "$repo/${page:t}"
+    echo $p >> "$repo/${page}"
   done
   if [[ $set_empty_msg == 1 ]]; then
     set_empty_msg=0
-    echo "  <li><a href=\"../\">  No files have been added." >> "$repo/${page:t}"
-    echo "Check back later for updates.</a></li>" >> "$repo/${page:t}"
+    echo "  <li><a href=\"../\">  No files have been added." >> "$repo/${page}"
+    echo "Check back later for updates.</a></li>" >> "$repo/${page}"
   fi
-  cat "$html_dir/postlist.html" >> "$repo/${page:t}"
+  cat "$html_dir/postlist.html" >> "$repo/${page}"
 done
