@@ -104,10 +104,7 @@ for page in ${(@o)pages[@]}; do
     cat $html_dir/postrepos.html >> $page
     continue
   fi
-  if [[ ! -d $repo ]]; then
-    continue
-  fi
-  pkgs=($(find $repo ! -name '*.html' ! -name $repo -type f | sed "s|$repo/||g"))
+  pkgs=($(find $repo ! -name '*.html' ! -name '*.css' ! -name $repo -type f | sed "s|$repo/||g"))
   if [[ -z $pkgs ]]; then
     set_empty_msg=1
   fi
