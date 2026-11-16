@@ -4,7 +4,8 @@ args=("$@")
 make_backups=0
 for arg in "${args[@]}"; do
   case $arg in
-    --backup)make_backups=1;;
+    --all) ALL_REPOS=1;;
+    --backup) make_backups=1;;
     *)echo "unknown option.";;
   esac
 done
@@ -39,8 +40,8 @@ for page in ${(@o)pages[@]}; do
   if [[ ! -f "$html_dir/backup.${page}" || $make_backups == 1 ]]; then
     cp $repo/${page} $html_dir/backup.${page}
   fi
-  echo "$repo/"
-  echo '' > $repo/${page}
+  printf '%s' "$repo/ "
+  printf '%s' '' > $repo/${page}
   if [[ ${${page:A}//$pkgdb_root/.} == "${${repo:A}//$pkgdb_root/.}/$page" ]]; then
     repos=($(find . -maxdepth 1 -type d ! -name '.' ! -name fonts ! -name .git ! -name html ! -name pkg ! -name docs | sed "s|\./||g"))
     cat $html_dir/prerepos.html >> $repo/$page
@@ -63,7 +64,7 @@ for page in ${(@o)pages[@]}; do
         list_slider=0
       fi
       repo_contents=($(find ${repo:l} ! -name '*.html' ! -name $repo -type f))
-      if [[ -z $repo_contents ]]; then
+      if [[ -z $repo_contents && $ALL_REPOS != 1 ]]; then
         continue
       fi
       rep_li="      <li><a href=\"${repo:l}/\">${(U)repo[1]}${repo[2,-1]}</a></li>"
@@ -102,11 +103,16 @@ for page in ${(@o)pages[@]}; do
       done
     fi
     cat $html_dir/postrepos.html >> $page
+    echo ""
     continue
   fi
   pkgs=($(find $repo ! -name '*.html' ! -name '*.css' ! -name $repo -type f | sed "s|$repo/||g"))
   if [[ -z $pkgs ]]; then
+    printf '%s' "Zero packages. "
     set_empty_msg=1
+    if [[ $ALL_REPOS != 1 ]]; then
+      printf '%s' "skipping."
+    fi
   fi
   cat "$html_dir/prelist.html" > "$repo/${page}"
   for p in ${pkgs[@]}; do
@@ -119,4 +125,5 @@ for page in ${(@o)pages[@]}; do
     echo "Check back later for updates.</a></li>" >> "$repo/${page}"
   fi
   cat "$html_dir/postlist.html" >> "$repo/${page}"
+  echo ""
 done
