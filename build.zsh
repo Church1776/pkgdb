@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 
 args=("$@")
-targ=()
+targs=()
 
 for arg in "${args[@]}"; do
   case $arg in
@@ -10,22 +10,22 @@ for arg in "${args[@]}"; do
     html) BUILD_MODE="html";;
     *)echo "unknown option.";;
   esac
-  targ=("$arg")
+  targs=("$arg")
   if [[ "$OPT_TYPE" == "short" ]]; then
-    chars=(${(%s..)targ#-})
-    targ=()
+    chars=(${(%s..)targs#-})
+    targs=()
     for c in "${chars}"; do
       case "$c" in
-        a) targ+=("--all");;
-        h) targ+=("--help");;
-        v) targ+=("--version");;
+        a) targs+=("--all");;
+        h) targs+=("--help");;
+        v) targs+=("--version");;
         *) echo "Unknown argument: '-$c'";;
       esac
     done
     OPT_TYPE="long"
   fi
   if [[ "$OPT_TYPE" == "long" ]]; then
-    for ta in "${targ}"; do
+    for ta in "${targs}"; do
       case "${ta#--}" in
         help) echo "Not implemented yet.";;
         version) echo "Not implemented yet.";;
@@ -34,7 +34,7 @@ for arg in "${args[@]}"; do
     done
   fi
 done
-
+unset targs
 if [[ ${zsh_eval_context[-1]} == file ]]; then
   printf '%s\n' \
   'This file is not meant to be sourced.' \
