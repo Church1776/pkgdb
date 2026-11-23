@@ -1,7 +1,0 @@
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="preload" href="docs/fonts/CascadiaMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="docs/css/base.css">
-  <link rel="stylesheet" href="docs/css/format.css">
-  <link rel="stylesheet" href="docs/css/rules.css">
-  <link rel="stylesheet" href="docs/css/tagcolor.css">
