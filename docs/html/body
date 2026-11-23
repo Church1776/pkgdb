@@ -1,28 +1,10 @@
-<body>
-  <main>
-    <h1></h1>
-    <p></p>
-    <h2></h2>
-  </main>
-  <nav class="defs">
-    <h3 class="defs">Windows</h3>
-      <ul class="defs">
-        <li class="defs"><a href="msys2/">Msys2</a></li>
-      </ul>
-    <h3 class="defs">Linux</h3>
-      <ul class="defs">
-        <li class="defs"><a href="debian/">Debian</a></li>
-        <li class="defs"><a href="void/">Void</a></li>
-      </ul>
-    <h3 class="defs">Darwin</h3>
-      <ul class="defs">
-        <li class="defs"><a href="macos/">MacOS</a></li>
-        <li class="defs"><a href="ios/">iOS</a></li>
-      </ul>
-    <h3 class="defs">BSD</h3>
-      <ul class="defs">
-        <li class="defs"><a href="freebsd/">FreeBSD</a></li>
-        <li class="defs"><a href="netbsd/">NetBSD</a></li>
-      </ul>
-  </nav>
-</body>
+<main class="">
+<nav class="">
+<h2 class="">
+<h3 class="">
+<h4 class="">
+<h5 class="">
+<h6 class="">
+<p class="">
+<ul class="">
+<li class="">
