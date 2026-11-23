@@ -6,6 +6,7 @@ for arg in "${args[@]}"; do
   case $arg in
     --all) ALL_REPOS=1;;
     --backup) make_backups=1;;
+    --test) TEST_PAGE=1;;
     *)echo "unknown option.";;
   esac
 done
@@ -28,10 +29,17 @@ if [[ $PWD != $pkgdb_root ]]; then
   cd $pkgdb_root
 fi
 
-pages=($(find . -name index.html | sed 's|\./||g'))
+if [[ TEST_PAGE == 1 ]]; then
+  idx_file='test.index.html'
+else
+  idx_file='index.html'
+fi
+
+pages=($(find . -name "$idx_file" | sed 's|\./||g'))
 winrepos=()
 linuxrepos=()
-macosrepos=()
+darwinrepos=()
+dltrepos=()
 for page in ${(@o)pages[@]}; do
   repo="${page:h}"
   page="${page:t}"
@@ -54,26 +62,35 @@ for page in ${(@o)pages[@]}; do
       if [[ $repo == 'msvc' || $repo == 'msys2' || $repo == 'cygwin' ]]; then
         list_slider=1
         repo="${repo//msvc/MSVC}"
-      elif [[ $repo == 'darwin' || $repo == 'lima' ]]; then
+        repo="${(U)repo[1]}${repo[2,-1]}"
+      elif [[ $repo == 'macos' || $repo == 'ios' ]]; then
         list_slider=2
         repo="${repo//macos/MacOS}"
+        repo="${repo//ios/iOS}"
       elif [[ $repo == *'bsd' ]]; then
         list_slider=3
         repo="${repo//bsd/BSD}"
+        repo="${(U)repo[1]}${repo[2,-1]}"
+      elif [[ $repo == 'dylix' ]]; then
+        list_slider=4
+        repo="${(U)repo[1]}${repo[2,-1]}"
       else
         list_slider=0
+        repo="${(U)repo[1]}${repo[2,-1]}"
       fi
       repo_contents=($(find ${repo:l} ! -name '*.html' ! -name $repo -type f))
       if [[ -z $repo_contents && $ALL_REPOS != 1 ]]; then
         continue
       fi
-      rep_li="      <li><a href=\"${repo:l}/\">${(U)repo[1]}${repo[2,-1]}</a></li>"
+      rep_li="      <li><a href=\"${repo:l}/\">${repo}</a></li>"
       if [[ $list_slider == 1 ]]; then
         winrepos+=($rep_li)
       elif [[ $list_slider == 2 ]]; then
-        macosrepos+=($rep_li)
+        darwinrepos+=($rep_li)
       elif [[ $list_slider == 3 ]]; then
         bsdrepos+=($rep_li)
+      elif [[ $list_slider == 4 ]]; then
+        dltrepos+=($rep_li)
       else
         linuxrepos+=($rep_li)
       fi
@@ -90,9 +107,15 @@ for page in ${(@o)pages[@]}; do
         echo $lr >> $page
       done
     fi
-    if [[ -n $macosrepos ]]; then
-      cat $html_dir/macosrepos.html >> $page
-      for mr in ${macosrepos[@]}; do
+    if [[ -n $darwinrepos ]]; then
+      cat $html_dir/darwinrepos.html >> $page
+      for mr in ${darwinrepos[@]}; do
+        echo $mr >> $page
+      done
+    fi
+    if [[ -n $dltrepos ]]; then
+      cat $html_dir/dltrepos.html >> $page
+      for mr in ${dltrepos[@]}; do
         echo $mr >> $page
       done
     fi
