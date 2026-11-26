@@ -71,18 +71,29 @@ XBODY='</body>'
 H1=''
 XH1='</h1>'
 H2=''
-XH2='</h1>'
+XH2='</h2>'
 H3=''
-XH2='</h1>'
+XH3='</h3>'
+H4=''
+XH4='</h4>'
+H5=''
+XH5='</h5>'
+H6=''
+XH6='</h6>'
+HEADER="$(read -r line < docs/html/body/header/header; print "$line")"
+XHEADER='</header>'
 MAIN="$(read -r line < docs/html/body/main/main; print "$line")"
 XMAIN='</main>'
 NAV="$(read -r line < docs/html/body/nav/nav; print "$line")"
 XNAV='</nav>'
 # Grab html head to set the page configs
-echo "FIND"
+echo "Generating webpages..."
 WEBDIRS=($(find . -maxdepth 1 -type d ! -name .git ! -name docs ! -name html ! -name pkg ! -name fonts | sed 's|\./||g' | sort))
-
+echo $WEBDIRS
+echoti sc
 for wdir in "${WEBDIRS[@]}"; do
+  echoti rc
+  echoti ed
   echo "'$wdir/'"
   padding=''
   repos=()
@@ -133,10 +144,10 @@ for wdir in "${WEBDIRS[@]}"; do
       if [[ -z "$contents" ]]; then
         continue
       else
-      H1=
+        H1="${H1:-"$(read -r line < docs/html/body/main/h1; print "$line")"}"
       fi
       if [[ "$repo" == 'msvc' || "$repo" == 'msys2' || "$repo" == 'cygwin' ]]; then
-
+        :
       fi
     done
   fi
@@ -147,17 +158,26 @@ for wdir in "${WEBDIRS[@]}"; do
   for conf in ${CONFIGS[@]}; do
   echo "${padding}${conf}"
   done
-  echo "${padding}${TITLE}${NAME}${XTITLE}"
+  echo "${padding}${TITLE}${PAGE_NAME}${XTITLE}"
   padding=''
   echo "${padding}${XHEAD}"
   echo "${padding}${BODY}"
   padding='  '
-  echo "${padding}${MAIN}"
-  echo "${padding}${XMAIN}"
+  echo "${padding}${HEADER}"
+  padding='    '
+  echo "${padding}${H1}${PAGE_NAME}${XH1}"
+  padding='    '
+  padding='  '
+  echo "${padding}${XHEADER}"
   echo "${padding}${NAV}"
+  padding='    '
+  padding='  '
   echo "${padding}${XNAV}"
+  echo "${padding}${MAIN}"
+  padding='  '
+  echo "${padding}${XMAIN}"
   padding=''
   echo "${padding}${XBODY}"
   echo "${padding}${XHTML}"
-  echo ''
+  sleep 0.2
 done
