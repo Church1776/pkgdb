@@ -1,12 +1,12 @@
-.defborder {
+.edge {
   border: 2px;
 }
-.width {
+.span {
   width: 100vw;
   max-width: 100%;
   min-width: 0;
 }
-.spacing {
+.align {
   margin: 0.0;
   padding: 0rem 0rem;
 }
