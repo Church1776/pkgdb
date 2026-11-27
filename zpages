@@ -86,10 +86,18 @@ MAIN="$(read -r line < docs/html/body/main/main; print "$line")"
 XMAIN='</main>'
 NAV="$(read -r line < docs/html/body/nav/nav; print "$line")"
 XNAV='</nav>'
+SECTION="$(read -r line < docs/html/body/section/section; print "$line")"
+XSECTION='</section>'
+ARTICLE="$(read -r line < docs/html/body/article/article; print "$line")"
+XARTICLE='</article>'
+ASIDE="$(read -r line < docs/html/body/aside/aside; print "$line")"
+XASIDE='</aside>'
+FOOTER="$(read -r line < docs/html/body/footer/footer; print "$line")"
+XFOOTER='</footer>'
 # Grab html head to set the page configs
 echo "Generating webpages..."
 WEBDIRS=($(find . -maxdepth 1 -type d ! -name .git ! -name docs ! -name html ! -name pkg ! -name fonts | sed 's|\./||g' | sort))
-echo $WEBDIRS
+
 echoti sc
 for wdir in "${WEBDIRS[@]}"; do
   echoti rc
@@ -166,7 +174,6 @@ for wdir in "${WEBDIRS[@]}"; do
   echo "${padding}${HEADER}"
   padding='    '
   echo "${padding}${H1}${PAGE_NAME}${XH1}"
-  padding='    '
   padding='  '
   echo "${padding}${XHEADER}"
   echo "${padding}${NAV}"
@@ -174,8 +181,25 @@ for wdir in "${WEBDIRS[@]}"; do
   padding='  '
   echo "${padding}${XNAV}"
   echo "${padding}${MAIN}"
+  padding='    '
   padding='  '
   echo "${padding}${XMAIN}"
+  echo "${padding}${SECTION}"
+  padding='    '
+  padding='  '
+  echo "${padding}${XSECTION}"
+  echo "${padding}${ARTICLE}"
+  padding='    '
+  padding='  '
+  echo "${padding}${XARTICLE}"
+  echo "${padding}${ASIDE}"
+  padding='    '
+  padding='  '
+  echo "${padding}${XASIDE}"
+  echo "${padding}${FOOTER}"
+  padding='    '
+  padding='  '
+  echo "${padding}${XFOOTER}"
   padding=''
   echo "${padding}${XBODY}"
   echo "${padding}${XHTML}"
