@@ -53,6 +53,7 @@ if [[ $PWD != $pkgdb_root ]]; then
   cd $pkgdb_root
 fi
 OUTPUT_FILENAME='test.index.html'
+FIND_TYPE=""
 PAGE_NAME=""
 WEBPAGE=""
 DOCTYPE='<!DOCTYPE html>'
@@ -61,6 +62,7 @@ XHTML='</html>'
 HEAD='<head class="">'
 XHEAD='</head>'
 CONFIGS=()
+PAGE_CONTENTS=""
 while IFS= read -r line; do
   CONFIGS+=("$line")
 done < 'docs/html/metadata'
@@ -100,12 +102,14 @@ XFOOTER='</footer>'
 echo "Generating webpages..."
 WEBDIRS=($(find . -maxdepth 1 -type d ! -name .git ! -name docs ! -name html ! -name pkg ! -name fonts | sed 's|\./||g' | sort))
 
-echoti sc
 for wdir in "${WEBDIRS[@]}"; do
-  echoti rc
-  echoti ed
   echo "'$wdir/'"
   padding=''
+  WEBPAGE="$(echo "${padding}${DOCTYPE}")\n"
+  WEBPAGE+="$(echo "${padding}${HTML}")\n"
+  WEBPAGE+="$(echo "${padding}${HEAD}")\n"
+  padding='  '
+
   repos=()
   contents=()
   wtitle="$wdir"
@@ -120,7 +124,7 @@ for wdir in "${WEBDIRS[@]}"; do
     esac
   
     PAGE_NAME="Church1776's Package Database"
-    
+  else
     while IFS= read -r found; do
       repos+=("$found")
     done <<< "$(find -maxdepth 1 -type d ! -name .git ! -name docs ! -name fonts ! -name pkg | sed 's|\./||g')"
@@ -137,7 +141,10 @@ for wdir in "${WEBDIRS[@]}"; do
       if [[ -z "$contents" ]]; then
         continue
       else
-        H1="${H1:-"$(read -r line < docs/html/body/main/h1; print "$line")"}"
+        padding='  '
+        PAGE_CONTENTS="$(echo "${padding}${HEADER}")"
+        PAGE_CONTENTS+="$(echo "${padding}${H1}${repo}${XH1}")\n"
+        PAGE_CONTENTS+="$(echo "${padding}${XHEADER}")\n"
       fi
       if [[ "$repo" == 'msvc' || "$repo" == 'msys2' || "$repo" == 'cygwin' ]]; then
         :
@@ -161,50 +168,16 @@ for wdir in "${WEBDIRS[@]}"; do
     esac
     PAGE_NAME="Church1776's $wtitle Repository"
   fi
-  
-  echo "${padding}${DOCTYPE}"
-  echo "${padding}${HTML}"
-  echo "${padding}${HEAD}"
-  padding='  '
   for conf in ${CONFIGS[@]}; do
-  echo "${padding}${conf}"
+    WEBPAGE+="$(echo "${padding}${conf}")\n"
   done
-  echo "${padding}${TITLE}${PAGE_NAME}${XTITLE}"
+  WEBPAGE+="$(echo "${padding}${TITLE}${PAGE_NAME}${XTITLE}")\n"
   padding=''
-  echo "${padding}${XHEAD}"
-  echo "${padding}${BODY}"
-  padding='  '
-  echo "${padding}${HEADER}"
-  padding='    '
-  echo "${padding}${H1}${PAGE_NAME}${XH1}"
-  padding='  '
-  echo "${padding}${XHEADER}"
-  echo "${padding}${NAV}"
-  padding='    '
-  padding='  '
-  echo "${padding}${XNAV}"
-  echo "${padding}${MAIN}"
-  padding='    '
-  padding='  '
-  echo "${padding}${XMAIN}"
-  echo "${padding}${SECTION}"
-  padding='    '
-  padding='  '
-  echo "${padding}${XSECTION}"
-  echo "${padding}${ARTICLE}"
-  padding='    '
-  padding='  '
-  echo "${padding}${XARTICLE}"
-  echo "${padding}${ASIDE}"
-  padding='    '
-  padding='  '
-  echo "${padding}${XASIDE}"
-  echo "${padding}${FOOTER}"
-  padding='    '
-  padding='  '
-  echo "${padding}${XFOOTER}"
+  WEBPAGE+="$(echo "${padding}${XHEAD}")\n"
+  WEBPAGE+="$(echo "${padding}${BODY}")\n"
+  WEBPAGE+="${PAGE_CONTENTS}"
   padding=''
-  echo "${padding}${XBODY}"
-  echo "${padding}${XHTML}"
-  sleep 0.2
+  WEBPAGE+="$(echo "${padding}${XBODY}")\n"
+  WEBPAGE+="$(echo "${padding}${XHTML}")\n"
+  echo "$WEBPAGE" > "$wdir/tmp.index.html"
 done
