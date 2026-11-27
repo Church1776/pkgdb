@@ -55,44 +55,46 @@ fi
 OUTPUT_FILENAME='test.index.html'
 PAGE_NAME=""
 WEBPAGE=""
-DOCTYPE="$(read -r line < docs/html/doctype; print "$line")"
-HTML="$(read -r line < docs/html/html; print "$line")"
+DOCTYPE='<!DOCTYPE html>'
+HTML='<html class="">'
 XHTML='</html>'
-HEAD="$(read -r line < docs/html/head/head; print "$line")"
+HEAD='<head class="">'
 XHEAD='</head>'
 CONFIGS=()
 while IFS= read -r line; do
   CONFIGS+=("$line")
-done < 'docs/html/head/configs'
-TITLE="$(read -r line < docs/html/head/title; print "$line")"
+done < 'docs/html/metadata'
+TITLE='<title class="">'
 XTITLE='</title>'
-BODY="$(read -r line < docs/html/body/body; print "$line")"
+BODY='<body class="">'
 XBODY='</body>'
-H1=''
+H1='<h1 class="">'
 XH1='</h1>'
-H2=''
+H2='<h2 class="">'
 XH2='</h2>'
-H3=''
+H3='<h3 class="">'
 XH3='</h3>'
-H4=''
+H4='<h4 class="">'
 XH4='</h4>'
-H5=''
+H5='<h5 class="">'
 XH5='</h5>'
-H6=''
+H6='<h6 class="">'
 XH6='</h6>'
-HEADER="$(read -r line < docs/html/body/header/header; print "$line")"
+HEADER='<header class="">'
 XHEADER='</header>'
-MAIN="$(read -r line < docs/html/body/main/main; print "$line")"
+MAIN='<main class="">'
 XMAIN='</main>'
-NAV="$(read -r line < docs/html/body/nav/nav; print "$line")"
+NAV='<nav class="">'
 XNAV='</nav>'
-SECTION="$(read -r line < docs/html/body/section/section; print "$line")"
+SECTION='<section class="">'
 XSECTION='</section>'
-ARTICLE="$(read -r line < docs/html/body/article/article; print "$line")"
+ARTICLE='<article class="">'
 XARTICLE='</article>'
-ASIDE="$(read -r line < docs/html/body/aside/aside; print "$line")"
+ASIDE='<aside class="">'
 XASIDE='</aside>'
-FOOTER="$(read -r line < docs/html/body/footer/footer; print "$line")"
+DIV='<div class="">'
+XDIV='</div>'
+FOOTER='<footer class="">'
 XFOOTER='</footer>'
 # Grab html head to set the page configs
 echo "Generating webpages..."
@@ -107,7 +109,8 @@ for wdir in "${WEBDIRS[@]}"; do
   repos=()
   contents=()
   wtitle="$wdir"
-  if [[ "$wdir" = '.' ]]; then
+  if [[ "$wdir/" == './' ]]; then
+  
     case "$CONFIGS" in
       *'"../docs/'*)
         for (( i=1; i <= ${#CONFIGS}; ++i )); do
@@ -115,26 +118,8 @@ for wdir in "${WEBDIRS[@]}"; do
         done
         ;;
     esac
+  
     PAGE_NAME="Church1776's Package Database"
-  else
-    case "$CONFIGS" in
-      *'"docs/'*) 
-        for (( i=1; i <= ${#CONFIGS}; ++i )); do
-          CONFIGS[$i]="${CONFIGS[$i]//\"docs\//\"../docs/}"
-        done
-        ;;
-    esac
-    case "$wtitle" in
-      msvc) wtitle='MSVC';;
-      ios) wtitle='iOS';;
-      *os?*) :;;
-      *bsd) wtitle="${wtitle//bsd/BSD}";|
-      *os) wtitle="${wtitle//os/OS}";|
-      *) wtitle="${(U)wtitle[1]}${wtitle[2,-1]}"
-    esac
-    PAGE_NAME="Church1776's $wtitle Repository"
-  fi
-  if [[ "$wdir/" == './' ]]; then
     
     while IFS= read -r found; do
       repos+=("$found")
@@ -158,7 +143,25 @@ for wdir in "${WEBDIRS[@]}"; do
         :
       fi
     done
+  else
+    case "$CONFIGS" in
+      *'"docs/'*) 
+        for (( i=1; i <= ${#CONFIGS}; ++i )); do
+          CONFIGS[$i]="${CONFIGS[$i]//\"docs\//\"../docs/}"
+        done
+        ;;
+    esac
+    case "$wtitle" in
+      msvc) wtitle='MSVC';;
+      ios) wtitle='iOS';;
+      *os?*) :;;
+      *bsd) wtitle="${wtitle//bsd/BSD}";|
+      *os) wtitle="${wtitle//os/OS}";|
+      *) wtitle="${(U)wtitle[1]}${wtitle[2,-1]}"
+    esac
+    PAGE_NAME="Church1776's $wtitle Repository"
   fi
+  
   echo "${padding}${DOCTYPE}"
   echo "${padding}${HTML}"
   echo "${padding}${HEAD}"
