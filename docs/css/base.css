@@ -111,7 +111,7 @@ body {
 html {
   color-scheme: light dark;
   scrollbar-gutter: stable;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 /* i {
 } */
@@ -129,8 +129,9 @@ html {
 } */
 /* legend {
 } */
-/* li {
-} */
+li {
+  list-style: none;
+}
 /* link {
 } */
 /* main {

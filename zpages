@@ -52,7 +52,8 @@ fi
 if [[ $PWD != $pkgdb_root ]]; then
   cd $pkgdb_root
 fi
-OUTPUT_FILENAME='test.index.html'
+__='  '
+OUTPUT_FILENAME='index.html'
 FIND_TYPE=""
 PAGE_NAME=""
 WEBPAGE=""
@@ -61,10 +62,10 @@ HTML='<html class="">'
 XHTML='</html>'
 HEAD='<head class="">'
 XHEAD='</head>'
-CONFIGS=()
+METADATA=()
 PAGE_CONTENTS=""
 while IFS= read -r line; do
-  CONFIGS+=("$line")
+  METADATA+=("$line")
 done < 'docs/html/metadata'
 TITLE='<title class="">'
 XTITLE='</title>'
@@ -82,6 +83,10 @@ H5='<h5 class="">'
 XH5='</h5>'
 H6='<h6 class="">'
 XH6='</h6>'
+UL='<ul class="">'
+XUL='</ul>'
+LI='<li class="">'
+XLI='</li>'
 HEADER='<header class="">'
 XHEADER='</header>'
 MAIN='<main class="">'
@@ -103,81 +108,106 @@ echo "Generating webpages..."
 WEBDIRS=($(find . -maxdepth 1 -type d ! -name .git ! -name docs ! -name html ! -name pkg ! -name fonts | sed 's|\./||g' | sort))
 
 for wdir in "${WEBDIRS[@]}"; do
-  echo "'$wdir/'"
+#  echo "'$wdir/'"
+
+  wtitle="$wdir"
   padding=''
+
   WEBPAGE="$(echo "${padding}${DOCTYPE}")\n"
   WEBPAGE+="$(echo "${padding}${HTML}")\n"
   WEBPAGE+="$(echo "${padding}${HEAD}")\n"
-  padding='  '
 
-  repos=()
-  contents=()
-  wtitle="$wdir"
-  if [[ "$wdir/" == './' ]]; then
-  
-    case "$CONFIGS" in
-      *'"../docs/'*)
-        for (( i=1; i <= ${#CONFIGS}; ++i )); do
-          CONFIGS[$i]="${CONFIGS[$i]//\"..\/docs\//\"docs/}"
-        done
-        ;;
-    esac
-  
+  if [[ "$wdir/" == './' ]]; then  
     PAGE_NAME="Church1776's Package Database"
-  else
-    while IFS= read -r found; do
-      repos+=("$found")
-    done <<< "$(find -maxdepth 1 -type d ! -name .git ! -name docs ! -name fonts ! -name pkg | sed 's|\./||g')"
-    
-    for repo in "${repos[@]}"; do
-      if [[ "$repo" == '.' ]]; then
-        continue
-      fi
-      contents=()
-      while IFS= read -r pkg; do
-        contents+=("$pkg")
-      done <<< "$(find "$repo" -maxdepth 1 -type f ! -name '*.html' ! -name '*.md' ! -name '*.rst' ! -name '*.css' | sed 's|\./||g')"
-      
-      if [[ -z "$contents" ]]; then
-        continue
-      else
-        padding='  '
-        PAGE_CONTENTS="$(echo "${padding}${HEADER}")"
-        PAGE_CONTENTS+="$(echo "${padding}${H1}${repo}${XH1}")\n"
-        PAGE_CONTENTS+="$(echo "${padding}${XHEADER}")\n"
-      fi
-      if [[ "$repo" == 'msvc' || "$repo" == 'msys2' || "$repo" == 'cygwin' ]]; then
-        :
-      fi
+    PAGE_CONTENTS=($(find . -maxdepth 1 -type d ! -name .git ! -name docs ! -name html ! -name pkg ! -name fonts | sed 's|\./||g' | sort))
+    for (( i=1; i<=${#PAGE_CONTENTS}; ++i )); do
+      PAGE_CONTENTS[$i]+="/"
     done
+    echo "'$wdir/' $PAGE_NAME"
   else
-    case "$CONFIGS" in
-      *'"docs/'*) 
-        for (( i=1; i <= ${#CONFIGS}; ++i )); do
-          CONFIGS[$i]="${CONFIGS[$i]//\"docs\//\"../docs/}"
-        done
-        ;;
-    esac
     case "$wtitle" in
       msvc) wtitle='MSVC';;
       ios) wtitle='iOS';;
-      *os?*) :;;
       *bsd) wtitle="${wtitle//bsd/BSD}";|
       *os) wtitle="${wtitle//os/OS}";|
       *) wtitle="${(U)wtitle[1]}${wtitle[2,-1]}"
     esac
     PAGE_NAME="Church1776's $wtitle Repository"
+    PAGE_CONTENTS=($(find "$wdir/" -maxdepth 1 -type f ! -name '*.html' ! -name '*.css' ! -name '*.js' | sed "s|$wdir/||g" | sort))
+    DIRSLASH=''
+    echo "'$wdir/' $PAGE_NAME"
+fi
+  if [[ -n "$METADATA" ]]; then
+    echo "Metadata NOT empty"
+    padding+="$__"
+    case "$PAGE_NAME" in
+      *Database*)
+        for (( i=1; i <= ${#METADATA}; ++i )); do
+          METADATA[$i]="${METADATA[$i]//\"..\/docs\//\"docs/}"
+        done
+        ;;
+      *Repository*)
+        for (( i=1; i <= ${#METADATA}; ++i )); do
+          METADATA[$i]="${METADATA[$i]//\"docs\//\"../docs/}"
+        done
+        ;;
+    esac
+    for md in ${METADATA[@]}; do
+      WEBPAGE+="$(echo "${padding}${md}")\n"
+    done
+    padding+="$__"
   fi
-  for conf in ${CONFIGS[@]}; do
-    WEBPAGE+="$(echo "${padding}${conf}")\n"
-  done
+  padding+="$__"
   WEBPAGE+="$(echo "${padding}${TITLE}${PAGE_NAME}${XTITLE}")\n"
-  padding=''
+  padding+="$__"
   WEBPAGE+="$(echo "${padding}${XHEAD}")\n"
   WEBPAGE+="$(echo "${padding}${BODY}")\n"
-  WEBPAGE+="${PAGE_CONTENTS}"
-  padding=''
+  padding+="$__"
+  WEBPAGE+="$(echo "${padding}${HEADER}")\n"
+  padding+="$__"
+  WEBPAGE+="$(echo "${padding}${H1}${PAGE_NAME}${XH1}")\n"
+  padding+="$__"
+  WEBPAGE+="$(echo "${padding}${XHEADER}")\n"
+  padding+="$__"
+  if [[ -n "${PAGE_CONTENTS}" ]]; then
+
+    padding+="$__"
+    WEBPAGE+="$(echo "${padding}${NAV}")\n"
+    padding+="$__"
+
+    case "$PAGE_NAME" in
+      *Database) WEBPAGE+="$(echo "${padding}${H2}Repositories${XH2}")\n";;
+      *Repository) WEBPAGE+="$(echo "${padding}${H2}Navigation${XH2}")\n"
+        WEBPAGE+="$(echo "${padding}${UL}")\n"
+        WEBPAGE+="$(echo "${padding}${__}${LI}<a href=\"../\">Home${XLI}")\n"
+        WEBPAGE+="$(echo "${padding}${XUL}")\n"
+    esac
+
+    if [[ "${PAGE_CONTENTS[1]}" == */ ]]; then
+    
+      WEBPAGE+="$(echo "${padding}${UL}")\n"
+      padding+="$__"
+    
+      for pc in "${PAGE_CONTENTS[@]}"; do
+        WEBPAGE+="${padding}${LI}<a href=\"${pc}\">${pc}${XLI}\n"
+      done
+    
+      padding+="$__"
+      WEBPAGE+="$(echo "${padding}${XUL}")\n"
+      padding+="$__"
+      WEBPAGE+="$(echo "${padding}${XNAV}")\n"
+    else
+      padding+="$__"
+      WEBPAGE+="$(echo "${padding}${XNAV}")\n"
+    fi
+
+    padding+="$__"
+    
+    padding+="$__"
+    WEBPAGE+="$(echo "${padding}${XMAIN}")\n"
+    padding+="$__"
+  fi
   WEBPAGE+="$(echo "${padding}${XBODY}")\n"
   WEBPAGE+="$(echo "${padding}${XHTML}")\n"
-  echo "$WEBPAGE" > "$wdir/tmp.index.html"
+  echo "$WEBPAGE" > "$wdir/$OUTPUT_FILENAME"
 done

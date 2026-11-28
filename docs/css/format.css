@@ -19,3 +19,19 @@
   margin: 0.0;
   padding: 0rem 0rem;
 }
+.files {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 0px solid color-mix(in srgb, CanvasText 12%, Canvas);
+  border-radius: 0.0rem;
+}
+.note {
+  white-space: pre-line;
+  margin: 0.5rem 1rem;
+}
+.page {
+  max-width: 100rem;
+  margin: 1 auto;
+  padding: 1.1rem 1.25rem;
+}
